@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: development-deployment
+  namespace: dev
 spec:
   replicas: 3
   selector:
@@ -13,6 +14,8 @@ spec:
         app: dev-app
     spec:
       containers:
-              image: us-central1-docker.pkg.dev/qwiklabs-gcp-01-749767212cda/my-repository/hello-cloudbuild-dev:v1.0
+      - name: dev-container
+        image: us-central1-docker.pkg.dev/qwiklabs-gcp-01-749767212cda/my-repository/hello-cloudbuild-dev:v1.0
         ports:
         - containerPort: 8080
+        imagePullPolicy: Always
